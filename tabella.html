@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Przykład AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Funkcja do pobierania i aktualizowania danych z serwera
+            function aktualizujTabele() {
+                $.ajax({
+                    url: "tabela.php",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        generujTabele(data);
+                    }
+                });
+            }
+
+            // Funkcja do generowania tabeli
+            function generujTabele(dane) {
+                var tabela = "<table cellpadding=5 border=1>";
+                tabela += "<tr><td>id</td><td>x1</td><td>x2</td><td>x3</td><td>x4</td><td>x5</td><td>Data/Godzina</td></tr>";
+
+                for (var i = 0; i < dane.length; i++) {
+                    tabela += "<tr>";
+                    tabela += "<td>" + dane[i][0] + "</td>";
+                    tabela += "<td>" + dane[i][1] + "</td>";
+                    tabela += "<td>" + dane[i][2] + "</td>";
+                    tabela += "<td>" + dane[i][3] + "</td>";
+                    tabela += "<td>" + dane[i][4] + "</td>";
+                    tabela += "<td>" + dane[i][5] + "</td>";
+                    tabela += "<td>" + dane[i][6] + "</td>";
+                    tabela += "</tr>";
+                }
+
+                tabela += "</table>";
+                $('#tabela').html(tabela);
+            }
+
+            // Aktualizowanie tabeli co 5 sekund
+            setInterval(aktualizujTabele, 5000);
+
+            // Wywołanie funkcji przy załadowaniu strony
+            aktualizujTabele();
+        });
+    </script>
+</head>
+<body>
+    <div id="tabela"></div>
+</body>
+</html>

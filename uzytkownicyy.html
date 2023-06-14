@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uzytkownicy</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Funkcja do pobierania i aktualizowania danych z serwera
+            function aktualizujTabele() {
+                $.ajax({
+                    url: "uzytkownicy.php",
+                    type: "GET",
+                    success: function(data) {
+                        $('#tabela').html(data);
+                    }
+                });
+            }
+
+            // Aktualizowanie tabeli co 5 sekund
+            setInterval(aktualizujTabele, 5000);
+
+            // Wywołanie funkcji przy załadowaniu strony
+            aktualizujTabele();
+        });
+    </script>
+</head>
+<body>
+    <div id="tabela"></div>
+</body>
+</html>

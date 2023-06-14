@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Przykład AJAX - Tabela danych</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Funkcja do aktualizacji tabeli
+            function aktualizujTabele() {
+                $.ajax({
+                    url: "google_tabela.php",
+                    type: "GET",
+                    success: function(data) {
+                        $('#table_div').html(data);
+                    }
+                });
+            }
+
+            // Aktualizowanie tabeli co 5 sekund
+            setInterval(aktualizujTabele, 5000);
+
+            // Wywołanie funkcji przy załadowaniu strony
+            aktualizujTabele();
+        });
+    </script>
+</head>
+<body>
+    <div id="table_div"></div>
+</body>
+</html>
